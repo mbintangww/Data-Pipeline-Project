@@ -1,0 +1,41 @@
+# Python virtual environment
+venv/
+__pycache__/
+*.py[cod]
+
+# Airflow logs
+logs/
+
+# Airflow database & temporary files
+airflow.db
+*.pid
+
+# DBT build and logs
+dbt/flights_analytics_dbt/target/
+dbt/flights_analytics_dbt/logs/
+
+# Terraform state files and backups
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/.terraform/
+terraform.tfvars
+
+# Local data folder 
+local_data/
+
+# Keys 
+keys/
+
+# Environment variables
+.env
+
+# Docker
+dockerignore
+*.log
+*.pid
+*.sock
+
+# Ignore python egg and dist info
+*.egg-info/
+dist/
+build/
