@@ -3,7 +3,7 @@ from airflow.operators.bash import BashOperator
 from datetime import datetime
 
 with DAG(
-    "run_dbt_models",
+    "dbt_models",
     schedule=None,
     start_date=datetime(2023, 1, 1),
     catchup=False,
@@ -12,5 +12,5 @@ with DAG(
 
     run_dbt = BashOperator(
         task_id="run_dbt",
-        bash_command="cd /opt/airflow/dbt/flights_analytics_dbt && dbt run",
+        bash_command="cd /opt/airflow/dbt/flights_analytics_dbt && dbt seed && dbt run",
     )

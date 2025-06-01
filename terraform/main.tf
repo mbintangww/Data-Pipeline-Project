@@ -18,8 +18,14 @@ resource "google_bigquery_dataset" "stg_dataset" {
 
 }
 
-resource "google_bigquery_dataset" "prod_dataset" {
-  dataset_id                  = var.prod_dataset_id
+resource "google_bigquery_dataset" "marts_dataset" {
+  dataset_id                  = var.marts_dataset_id
+  location                    = "asia-southeast1"
+  delete_contents_on_destroy = true  
+}
+
+resource "google_bigquery_dataset" "raw_dataset" {
+  dataset_id                  = var.raw_dataset_id
   location                    = "asia-southeast1"
   delete_contents_on_destroy = true  
 }

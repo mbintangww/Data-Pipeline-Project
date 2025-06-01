@@ -9,6 +9,8 @@ logs/
 # Airflow database & temporary files
 airflow.db
 *.pid
+config/
+
 
 # DBT build and logs
 dbt/flights_analytics_dbt/target/
@@ -19,9 +21,6 @@ terraform/terraform.tfstate
 terraform/terraform.tfstate.backup
 terraform/.terraform/
 terraform.tfvars
-
-# Local data folder 
-local_data/
 
 # Keys 
 keys/

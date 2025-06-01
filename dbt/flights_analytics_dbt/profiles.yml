@@ -4,8 +4,8 @@ flights_analytics_dbt:
     dev:
       type: bigquery
       method: service-account
-      project: lunar-outlet-456701-t7
-      dataset: airflow_stg_bq_dataset
+      project: "{{ env_var('GCP_PROJECT_ID') }}"
+      dataset: airflow_bq_dataset
       threads: 1
       keyfile: /opt/airflow/keys/gcp_credentials.json
       timeout_seconds: 400

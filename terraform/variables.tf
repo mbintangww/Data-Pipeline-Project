@@ -15,11 +15,16 @@ variable "bucket_name" {
 }
 
 variable "stg_dataset_id" {
-  description = "ID dataset for stg BigQuery"
+  description = "dataset to store stg table"
   type        = string
 }
 
-variable "prod_dataset_id" {
-  description = "ID dataset for prod BigQuery"
+variable "marts_dataset_id" {
+  description = "dataset to store marts table"
+  type        = string
+}
+
+variable "raw_dataset_id" {
+  description = "store source and seed"
   type        = string
 }
