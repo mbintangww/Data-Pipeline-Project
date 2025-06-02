@@ -59,9 +59,12 @@ x-airflow-common: &airflow-common
     AIRFLOW__CORE__FERNET_KEY: ""
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
     AIRFLOW__CORE__LOAD_EXAMPLES: "false"
-    AIRFLOW__CORE__EXECUTION_API_SERVER_URL: "http://airflow-apiserver:8080/execution/"
-    GCP_PROJECT_ID: #your-gcp-project-id
-    GCP_BUCKET_NAME: #your-gcs-bucket-name
+    AIRFLOW_API_AUTH_JWT_SECRET: #your-jwt-secret-key
+    AIRFLOW_CORE_EXECUTION_API_SERVER_URL: "http://airflow-apiserver:8080/execution/"
+    AIRFLOW_WEBSERVER_SECRET_KEY: #your-webserver-secret-key
+    AIRFLOW_WEBSERVER_ENABLE_PROXY_FIX: "True"
+    GCP_PROJECT_ID: #your-project-gcp-id
+    GCP_BUCKET_NAME: #your-bucket-name
     # yamllint disable rule:line-length
     # Use simple http server on scheduler for health checks
     # See https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/check-health.html#scheduler-health-check-server

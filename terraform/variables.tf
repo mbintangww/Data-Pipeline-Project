@@ -2,6 +2,9 @@ variable "project_id" {
   description = "Google Cloud project ID"
   type        = string
 }
+variable "secret_key" {
+  type        = string
+}
 
 variable "region" {
   description = "Bucket location"

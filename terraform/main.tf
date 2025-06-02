@@ -1,6 +1,8 @@
 provider "google" {
   project = var.project_id
   region  = var.region
+  credentials = file(var.secret_key)
+  
 }
 
 resource "google_storage_bucket" "gcs_bucket" {

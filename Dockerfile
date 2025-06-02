@@ -2,7 +2,7 @@ FROM apache/airflow:3.0.1-python3.10
 
 USER root
 
-# Install git (required by dbt) and upgrade pip
+# Install git
 RUN apt-get update && \
     apt-get install -y git && \
     apt-get clean && \
@@ -17,5 +17,5 @@ RUN pip install --upgrade pip
 # Copy requirements file
 COPY requirements.txt .
 
-# Install Python dependencies via pip
+# Install requirements file
 RUN pip install --no-cache-dir -r requirements.txt

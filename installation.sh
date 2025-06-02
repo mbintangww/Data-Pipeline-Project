@@ -6,7 +6,7 @@ set -e
 sudo apt-get update && sudo apt-get upgrade -y
 
 #installing python and pip
-echo "Installing Python & pip..."
+echo "Installing Python & pip"
 sudo apt-get install -y python3 python3-pip python3-venv
 
 #installing git
