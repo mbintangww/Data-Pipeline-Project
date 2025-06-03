@@ -59,12 +59,14 @@ x-airflow-common: &airflow-common
     AIRFLOW__CORE__FERNET_KEY: ""
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
     AIRFLOW__CORE__LOAD_EXAMPLES: "false"
-    AIRFLOW_API_AUTH_JWT_SECRET: #your-jwt-secret-key
-    AIRFLOW_CORE_EXECUTION_API_SERVER_URL: "http://airflow-apiserver:8080/execution/"
-    AIRFLOW_WEBSERVER_SECRET_KEY: #your-webserver-secret-key
+    AIRFLOW__API_AUTH__JWT_SECRET: #your-jwt-secret-key
+    AIRFLOW__CORE__EXECUTION_API_SERVER_URL: "http://airflow-apiserver:8080/execution/"
+    AIRFLOW__WEBSERVER__SECRET_KEY: #your-webserver-secret-key
     AIRFLOW_WEBSERVER_ENABLE_PROXY_FIX: "True"
     GCP_PROJECT_ID: #your-project-gcp-id
     GCP_BUCKET_NAME: #your-bucket-name
+    AIRFLOW_UID: ${AIRFLOW_UID}
+    AIRFLOW_GID: ${AIRFLOW_GID}
     # yamllint disable rule:line-length
     # Use simple http server on scheduler for health checks
     # See https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/check-health.html#scheduler-health-check-server
@@ -85,7 +87,7 @@ x-airflow-common: &airflow-common
     - ${AIRFLOW_PROJ_DIR:-.}/dbt/flights_analytics_dbt/profiles.yml:/home/airflow/.dbt/profiles.yml
     - ${AIRFLOW_PROJ_DIR:-.}/dbt/flights_analytics_dbt:/opt/airflow/dbt/flights_analytics_dbt
 
-  user: "${AIRFLOW_UID:-50000}:0"
+  user: "${AIRFLOW_UID}:${AIRFLOW_GID}"
   depends_on: &airflow-common-depends-on
     postgres:
       condition: service_healthy
