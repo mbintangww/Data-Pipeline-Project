@@ -6,13 +6,13 @@ This data pipeline project aims to automate the Extract, Load, and Transform (EL
 
 To support this analysis, I collected a comprehensive dataset from Kaggle, covering flight records from 2018 to 2023, containing over 30 million rows. Despite the data being historical, it provides valuable insights into flight delay trends, seasonal patterns, and airline performance.
 
-in this project, i use Terraform as Iac tools to create bucket cloud storage as data lake and bigquery as data warehouse, structured into three layers: raw, staging, and marts. All data pipeline steps is running inside a docker container and airflow is used to manage the flow for each steps.
+In this project, i use Terraform as Iac tools to create bucket cloud storage as data lake and bigquery as data warehouse, structured into three layers: raw, staging, and marts. All data pipeline steps is running inside a docker container and airflow is used to manage the flow for each steps.
 
-Main Objective:
+### Main Objective:
 
-- develope automate data pipeline with airflow
-- create data models using dbt
-- visualize models in dashboard
+- Develope automate data pipeline with airflow
+- Create data models using dbt
+- Visualize models in dashboard
 
 ## Tools and Tech
 
@@ -26,16 +26,20 @@ Main Objective:
 - VM: Compute Engine
 - Dashboard: Google Data Looker Studio
 
+## Future Improvements
+
+- Add data quality testing
+- Set up automated notifications via email
+- Implement table partitioning and clustering
+
 ## Design Architecture
 
 ![show](images/design-pipeline.drawio.png)
 
--
-
 ## Dashboard
 
 ![show](images/dashboard-looker.png)
-to see dashboard click[here](https://lookerstudio.google.com/u/0/reporting/b7cc53d9-202d-4fcd-80bf-4761bca49fd1/page/gAUMF/edit)
+to see dashboard click [here](https://lookerstudio.google.com/u/0/reporting/b7cc53d9-202d-4fcd-80bf-4761bca49fd1/page/gAUMF/edit)
 
 ## How to run?
 
