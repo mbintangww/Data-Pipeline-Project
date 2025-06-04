@@ -1,18 +1,57 @@
-# Data Pipeline Deployment Guide (GCP + Airflow + Terraform)
+# Flight Delay Data Pipeline
 
-## 1. Create New GCP Project
+## Description
+
+This data pipeline project aims to automate the Extract, Load, and Transform (ELT) process for analyzing flight delays in the United States. In the modern world, time is a critical factor—especially in transportation and mobility. Understanding flight delay patterns can help improve decision-making for both passengers and stakeholders in the aviation industry.
+
+To support this analysis, I collected a comprehensive dataset from Kaggle, covering flight records from 2018 to 2023, containing over 30 million rows. Despite the data being historical, it provides valuable insights into flight delay trends, seasonal patterns, and airline performance.
+
+in this project, i use Terraform as Iac tools to create bucket cloud storage as data lake and bigquery as data warehouse, structured into three layers: raw, staging, and marts. All data pipeline steps is running inside a docker container and airflow is used to manage the flow for each steps.
+
+Main Objective:
+
+- develope automate data pipeline with airflow
+- create data models using dbt
+- visualize models in dashboard
+
+## Tools and Tech
+
+- Cloud: GCP
+- Infrastructure as code (IaC): Terraform
+- Orchestration: Airflow
+- Data Warehouse: BigQuery
+- Data Lake: Google Cloud Storage
+- Data processing: dbt
+- Container: Docker
+- VM: Compute Engine
+- Dashboard: Google Data Looker Studio
+
+## Design Architecture
+
+![show](images/design-pipeline.drawio.png)
+
+-
+
+## Dashboard
+
+![show](images/dashboard-looker.png)
+to see dashboard click[here](https://lookerstudio.google.com/u/0/reporting/b7cc53d9-202d-4fcd-80bf-4761bca49fd1/page/gAUMF/edit)
+
+## How to run?
+
+### 1. Create New GCP Project
 
 1. Go to [Google Cloud Console](https://console.cloud.google.com/).
 2. Create a new project.
 
-## 2. Enable Required APIs
+### 2. Enable Required APIs
 
 Enable these APIs in your project:
 
 - **BigQuery API**
 - **Compute Engine API**
 
-## 3. Create a Virtual Machine
+### 3. Create a Virtual Machine
 
 1. Open the **Compute Engine** menu.
 2. Click **Create Instance**.
@@ -21,7 +60,7 @@ Enable these APIs in your project:
 5. Click **Create**.
 6. Done!!
 
-## 4. Open Port 8080 for Airflow UI
+### 4. Open Port 8080 for Airflow UI
 
 1. Go to **VPC Network** > **Firewall**.
 2. Scroll down and click `default-allow-http`.
@@ -32,7 +71,7 @@ Enable these APIs in your project:
 
 ---
 
-## 5. Create a Service Account
+### 5. Create a Service Account
 
 1. Go to **IAM & Admin** > **Service Accounts**.
 2. Click `+ CREATE SERVICE ACCOUNT`.
@@ -44,7 +83,7 @@ Enable these APIs in your project:
 
 ---
 
-## 6. VM Setup
+### 6. VM Setup
 
 1. Open your VM in **Compute Engine** menu.
 2. Click **SSH**.
@@ -67,7 +106,7 @@ Enable these APIs in your project:
    git clone https://github.com/mbintangww/Data-Pipeline-Project.git
    ```
 
-## 7. Create Instance
+### 7. Create Instance
 
 1.  Navigate to the data-pipeline-project folder:
     ```bash
@@ -75,9 +114,9 @@ Enable these APIs in your project:
     ```
 2.  Create `keys/` folder, add your **service account key** file and rename it to:
 
-```
-gcp_credentials.json
-```
+    ```
+    gcp_credentials.json
+    ```
 
 3.  Navigate to the terraform folder:
     ```bash
@@ -106,7 +145,7 @@ gcp_credentials.json
 
 ---
 
-## 8. Prepare Folders
+### 8. Prepare Folders
 
 1. In your `data-pipeline-project`, create these folders:
 
@@ -127,7 +166,7 @@ gcp_credentials.json
 
 ---
 
-## 9. Docker Compose Setup
+### 9. Docker Compose Setup
 
 1. Navigate to `data-pipeline-project` folder.
 2. Open `docker-compose.yaml` file.
@@ -146,7 +185,7 @@ gcp_credentials.json
    openssl rand -hex 32
    ```
 
-## 10. Build and Run Airflow
+### 10. Build and Run Airflow
 
 Make sure you're in the project root folder (`data-pipeline-project`) and run:
 
@@ -164,7 +203,7 @@ sudo docker compose up -d
 
 ---
 
-## 11. Upload Dataset
+### 11. Upload Dataset
 
 1.  You can download dataset from [here](https://www.kaggle.com/datasets/arvindnagaonkar/flight-delay/data).
 2.  Extract and get a file with name `features_added.parquet`
@@ -172,7 +211,7 @@ sudo docker compose up -d
 
 ---
 
-## 12. Create connection in Airflow
+### 12. Create connection in Airflow
 
 1. Go to **Compute Engine** > **VM Instance**.
 2. Copy and paste external IP
@@ -190,7 +229,7 @@ sudo docker compose up -d
 
 ---
 
-## 13. Run DAG in Airflow
+### 13. Run DAG in Airflow
 
 1. Navigate to **DAG** menu
 2. first run `upload_data`, then run `dbt_models`
